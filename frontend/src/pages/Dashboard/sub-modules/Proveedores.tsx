@@ -25,7 +25,7 @@ export default function Proveedores() {
   const [idEditando, setIdEditando] = useState<number | null>(null);
 
   const cargarProveedores = () => {
-    axios.get<Proveedor[]>('http://localhost:5000/api/proveedores')
+    axios.get<Proveedor[]>('https://sigma-production-e9dc.up.railway.app/api/proveedores')
       .then(res => setProveedores(res.data))
       .catch(err => console.error('Error al cargar lista de proveedores:', err));
   };
@@ -41,7 +41,7 @@ export default function Proveedores() {
     const datosProveedor = { nombre, telefono, cuit, direccion, tipo };
 
     if (idEditando) {
-      axios.put(`http://localhost:5000/api/proveedores/${idEditando}`, datosProveedor)
+      axios.put(`https://sigma-production-e9dc.up.railway.app/api/proveedores/${idEditando}`, datosProveedor)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           cancelarEdicion();
@@ -49,7 +49,7 @@ export default function Proveedores() {
         })
         .catch(err => setMensaje({ texto: err.response?.data?.error || 'Error al actualizar', esError: true }));
     } else {
-      axios.post('http://localhost:5000/api/proveedores', datosProveedor)
+      axios.post('https://sigma-production-e9dc.up.railway.app/api/proveedores', datosProveedor)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           limpiarFormulario();
@@ -71,7 +71,7 @@ export default function Proveedores() {
 
   const eliminarProveedor = (id: number, nombreProv: string) => {
     if (window.confirm(`¿Estás seguro de que querés eliminar al proveedor: ${nombreProv}?`)) {
-      axios.delete(`http://localhost:5000/api/proveedores/${id}`)
+      axios.delete(`https://sigma-production-e9dc.up.railway.app/api/proveedores/${id}`)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           if (idEditando === id) cancelarEdicion();

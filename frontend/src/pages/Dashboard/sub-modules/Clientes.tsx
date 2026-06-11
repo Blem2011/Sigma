@@ -25,7 +25,7 @@ export default function Clientes() {
   const [idEditando, setIdEditando] = useState<number | null>(null);
 
   const cargarClientes = () => {
-    axios.get<Cliente[]>('http://localhost:5000/api/clientes')
+    axios.get<Cliente[]>('https://sigma-production-e9dc.up.railway.app/api/clientes')
       .then(res => setClientes(res.data))
       .catch(err => console.error('Error al cargar lista de clientes:', err));
   };
@@ -41,7 +41,7 @@ export default function Clientes() {
     const datosCliente = { nombre, telefono, cuit, direccion, tipo };
 
     if (idEditando) {
-      axios.put(`http://localhost:5000/api/clientes/${idEditando}`, datosCliente)
+      axios.put(`https://sigma-production-e9dc.up.railway.app/api/clientes/${idEditando}`, datosCliente)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           cancelarEdicion();
@@ -49,7 +49,7 @@ export default function Clientes() {
         })
         .catch(err => setMensaje({ texto: err.response?.data?.error || 'Error al actualizar', esError: true }));
     } else {
-      axios.post('http://localhost:5000/api/clientes', datosCliente)
+      axios.post('https://sigma-production-e9dc.up.railway.app/api/clientes', datosCliente)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           limpiarFormulario();
@@ -71,7 +71,7 @@ export default function Clientes() {
 
   const eliminarCliente = (id: number, nombreCliente: string) => {
     if (window.confirm(`¿Estás seguro de que querés eliminar al cliente: ${nombreCliente}?`)) {
-      axios.delete(`http://localhost:5000/api/clientes/${id}`)
+      axios.delete(`https://sigma-production-e9dc.up.railway.app/api/clientes/${id}`)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           if (idEditando === id) cancelarEdicion();

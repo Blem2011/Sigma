@@ -32,8 +32,8 @@ export default function Obras() {
   const cargarDatos = async () => {
     try {
       const [resObras, resClientes] = await Promise.all([
-        axios.get<Obra[]>('http://localhost:5000/api/obras'),
-        axios.get<Cliente[]>('http://localhost:5000/api/clientes')
+        axios.get<Obra[]>('https://sigma-production-e9dc.up.railway.app/api/obras'),
+        axios.get<Cliente[]>('https://sigma-production-e9dc.up.railway.app/api/clientes')
       ]);
       setObras(resObras.data);
       setClientes(resClientes.data);
@@ -60,7 +60,7 @@ export default function Obras() {
     };
 
     if (idEditando) {
-      axios.put(`http://localhost:5000/api/obras/${idEditando}`, datosObra)
+      axios.put(`https://sigma-production-e9dc.up.railway.app/api/obras/${idEditando}`, datosObra)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           cancelarEdicion();
@@ -68,7 +68,7 @@ export default function Obras() {
         })
         .catch(err => setMensaje({ texto: err.response?.data?.error || 'Error al actualizar', esError: true }));
     } else {
-      axios.post('http://localhost:5000/api/obras', datosObra)
+      axios.post('https://sigma-production-e9dc.up.railway.app/api/obras', datosObra)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           limpiarFormulario();
@@ -93,7 +93,7 @@ export default function Obras() {
 
   const eliminarObra = (id: number, nombreObra: string) => {
     if (window.confirm(`¿Seguro que querés eliminar el proyecto: ${nombreObra}?`)) {
-      axios.delete(`http://localhost:5000/api/obras/${id}`)
+      axios.delete(`https://sigma-production-e9dc.up.railway.app/api/obras/${id}`)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           if (idEditando === id) cancelarEdicion();

@@ -18,7 +18,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
     e.preventDefault();
     setError('');
 
-    axios.post('http://localhost:5000/api/login', { usuario, password })
+    axios.post('https://sigma-production-e9dc.up.railway.app/api/login', { usuario, password })
       .then(res => {
         if (res.data.success) onLoginSuccess(res.data.user);
       })

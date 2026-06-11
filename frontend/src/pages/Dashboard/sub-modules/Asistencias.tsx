@@ -32,8 +32,8 @@ export default function Asistencias() {
   const cargarDatos = async () => {
     try {
       const [resAsis, resEmp] = await Promise.all([
-        axios.get<Asistencia[]>('http://localhost:5000/api/asistencias'),
-        axios.get<Empleado[]>('http://localhost:5000/api/empleados')
+        axios.get<Asistencia[]>('https://sigma-production-e9dc.up.railway.app/api/asistencias'),
+        axios.get<Empleado[]>('https://sigma-production-e9dc.up.railway.app/api/empleados')
       ]);
       setAsistencias(resAsis.data);
       setEmpleados(resEmp.data);
@@ -53,7 +53,7 @@ export default function Asistencias() {
     // Si el estado es una falta, ignoramos los horarios ingresados
     const esFalta = estado.includes('Falta') || estado === 'Ausente';
 
-    axios.post('http://localhost:5000/api/asistencias', {
+    axios.post('https://sigma-production-e9dc.up.railway.app/api/asistencias', {
       id_empleado: Number(idEmpleado),
       fecha,
       estado,

@@ -28,9 +28,9 @@ export default function Consumos() {
   const cargarDatos = async () => {
     try {
       const [resObras, resMat, resCons] = await Promise.all([
-        axios.get<Obra[]>('http://localhost:5000/api/obras'),
-        axios.get<Material[]>('http://localhost:5000/api/materiales'),
-        axios.get<HistorialConsumo[]>('http://localhost:5000/api/consumos')
+        axios.get<Obra[]>('https://sigma-production-e9dc.up.railway.app/api/obras'),
+        axios.get<Material[]>('https://sigma-production-e9dc.up.railway.app/api/materiales'),
+        axios.get<HistorialConsumo[]>('https://sigma-production-e9dc.up.railway.app/api/consumos')
       ]);
       setObras(resObras.data);
       setMateriales(resMat.data);
@@ -48,7 +48,7 @@ export default function Consumos() {
     e.preventDefault();
     setMensaje({ texto: '', esError: false });
 
-    axios.post('http://localhost:5000/api/consumos', {
+    axios.post('https://sigma-production-e9dc.up.railway.app/api/consumos', {
       id_obra: Number(idObra),
       id_material: Number(idMaterial),
       cantidad: Number(cantidad)

@@ -31,9 +31,9 @@ export default function Compras() {
   const cargarDatosIniciales = async () => {
     try {
       const [resProv, resMat, resComp] = await Promise.all([
-        axios.get<Proveedor[]>('http://localhost:5000/api/proveedores'),
-        axios.get<Material[]>('http://localhost:5000/api/materiales'),
-        axios.get<HistorialCompra[]>('http://localhost:5000/api/compras')
+        axios.get<Proveedor[]>('https://sigma-production-e9dc.up.railway.app/api/proveedores'),
+        axios.get<Material[]>('https://sigma-production-e9dc.up.railway.app/api/materiales'),
+        axios.get<HistorialCompra[]>('https://sigma-production-e9dc.up.railway.app/api/compras')
       ]);
       setProveedores(resProv.data);
       setMateriales(resMat.data);
@@ -51,7 +51,7 @@ export default function Compras() {
     e.preventDefault();
     setMensaje({ texto: '', esError: false });
 
-    axios.post('http://localhost:5000/api/compras', {
+    axios.post('https://sigma-production-e9dc.up.railway.app/api/compras', {
       id_proveedor: Number(idProveedor),
       id_material: Number(idMaterial),
       cantidad: Number(cantidad),

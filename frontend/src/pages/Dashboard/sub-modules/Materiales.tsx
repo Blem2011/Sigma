@@ -23,7 +23,7 @@ export default function Materiales() {
   const [idEditando, setIdEditando] = useState<number | null>(null);
 
   const cargarMateriales = () => {
-    axios.get<Material[]>('http://localhost:5000/api/materiales')
+    axios.get<Material[]>('https://sigma-production-e9dc.up.railway.app/api/materiales')
       .then(res => setMateriales(res.data))
       .catch(err => console.error('Error al cargar inventario:', err));
   };
@@ -44,7 +44,7 @@ export default function Materiales() {
     };
 
     if (idEditando) {
-      axios.put(`http://localhost:5000/api/materiales/${idEditando}`, datosMaterial)
+      axios.put(`https://sigma-production-e9dc.up.railway.app/api/materiales/${idEditando}`, datosMaterial)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           cancelarEdicion();
@@ -52,7 +52,7 @@ export default function Materiales() {
         })
         .catch(err => setMensaje({ texto: err.response?.data?.error || 'Error al actualizar', esError: true }));
     } else {
-      axios.post('http://localhost:5000/api/materiales', datosMaterial)
+      axios.post('https://sigma-production-e9dc.up.railway.app/api/materiales', datosMaterial)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           limpiarFormulario();
@@ -73,7 +73,7 @@ export default function Materiales() {
 
   const eliminarMaterial = (id: number, nombreMat: string) => {
     if (window.confirm(`¿Seguro que querés eliminar el material: ${nombreMat}?`)) {
-      axios.delete(`http://localhost:5000/api/materiales/${id}`)
+      axios.delete(`https://sigma-production-e9dc.up.railway.app/api/materiales/${id}`)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           if (idEditando === id) cancelarEdicion();

@@ -39,7 +39,7 @@ export default function Usuarios() {
 
     if (idUsuarioEditando) {
       // MODO EDICIÓN (PUT)
-      axios.put(`http://localhost:5000/api/usuarios/${idUsuarioEditando}`, {
+      axios.put(`https://sigma-production-e9dc.up.railway.app/api/usuarios/${idUsuarioEditando}`, {
         nombre_completo: nombreForm,
         usuario: userForm,
         password: passForm, // Puede ir vacío
@@ -57,7 +57,7 @@ export default function Usuarios() {
       // MODO CREACIÓN (POST)
       if (!passForm) return setMensaje({ texto: 'La contraseña es obligatoria', esError: true });
       
-      axios.post('http://localhost:5000/api/usuarios', {
+      axios.post('https://sigma-production-e9dc.up.railway.app/api/usuarios', {
         nombre_completo: nombreForm,
         usuario: userForm,
         password: passForm,
@@ -87,7 +87,7 @@ export default function Usuarios() {
   // NUEVO: Borrar un usuario confirmando la acción primero
   const eliminarUsuario = (id: number, nombre: string) => {
     if (window.confirm(`¿Estás seguro de que querés eliminar a ${nombre}?`)) {
-      axios.delete(`http://localhost:5000/api/usuarios/${id}`)
+      axios.delete(`https://sigma-production-e9dc.up.railway.app/api/usuarios/${id}`)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           if (idUsuarioEditando === id) cancelarEdicion();

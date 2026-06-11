@@ -30,8 +30,8 @@ export default function Empleados() {
   const cargarDatos = async () => {
     try {
       const [resEmp, resObras] = await Promise.all([
-        axios.get<Empleado[]>('http://localhost:5000/api/empleados'),
-        axios.get<Obra[]>('http://localhost:5000/api/obras')
+        axios.get<Empleado[]>('https://sigma-production-e9dc.up.railway.app/api/empleados'),
+        axios.get<Obra[]>('https://sigma-production-e9dc.up.railway.app/api/obras')
       ]);
       setEmpleados(resEmp.data);
       setObras(resObras.data);
@@ -57,7 +57,7 @@ export default function Empleados() {
     };
 
     if (idEditando) {
-      axios.put(`http://localhost:5000/api/empleados/${idEditando}`, datosEmpleado)
+      axios.put(`https://sigma-production-e9dc.up.railway.app/api/empleados/${idEditando}`, datosEmpleado)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           cancelarEdicion();
@@ -65,7 +65,7 @@ export default function Empleados() {
         })
         .catch(err => setMensaje({ texto: err.response?.data?.error || 'Error al actualizar', esError: true }));
     } else {
-      axios.post('http://localhost:5000/api/empleados', datosEmpleado)
+      axios.post('https://sigma-production-e9dc.up.railway.app/api/empleados', datosEmpleado)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           limpiarFormulario();
@@ -87,7 +87,7 @@ export default function Empleados() {
 
   const eliminarEmpleado = (id: number, nombre: string) => {
     if (window.confirm(`¿Estás seguro de que querés dar de baja a ${nombre}?`)) {
-      axios.delete(`http://localhost:5000/api/empleados/${id}`)
+      axios.delete(`https://sigma-production-e9dc.up.railway.app/api/empleados/${id}`)
         .then(res => {
           setMensaje({ texto: res.data.mensaje, esError: false });
           if (idEditando === id) cancelarEdicion();
