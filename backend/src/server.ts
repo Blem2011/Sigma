@@ -15,13 +15,13 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Configuración de la conexión a la base de datos MySQL con tipado seguro
+// Configuración definitiva para producción en Railway
 const db = mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost',
-  port: Number(process.env.DB_PORT) || 3306,
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'railway'
+  host: process.env.MYSQLHOST || process.env.DB_HOST,
+  port: Number(process.env.MYSQLPORT) || Number(process.env.DB_PORT) || 3306,
+  user: process.env.MYSQLUSER || process.env.DB_USER || 'root',
+  password: process.env.MYSQLPASSWORD || process.env.DB_PASSWORD,
+  database: process.env.MYSQLDATABASE || process.env.DB_NAME || 'railway'
 });
 
 // Conectar formalmente a MySQL

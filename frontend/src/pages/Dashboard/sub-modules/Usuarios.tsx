@@ -23,7 +23,7 @@ export default function Usuarios() {
   const [idUsuarioEditando, setIdUsuarioEditando] = useState<number | null>(null);
 
   const cargarUsuarios = () => {
-    axios.get<Usuario[]>('http://localhost:5000/api/usuarios')
+    axios.get<Usuario[]>('https://sigma-production-e9dc.up.railway.app/api/usuarios')
       .then(res => setUsuarios(res.data))
       .catch(err => console.error('Error al cargar lista:', err));
   };
