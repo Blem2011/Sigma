@@ -1,0 +1,57 @@
+/* Contenedor principal en grilla fluida */
+.consumos-modulo-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 25px;
+  margin-top: 5px;
+  animation: fadeSlideInSub 0.4s ease-out forwards;
+}
+
+@media (max-width: 1024px) {
+  .consumos-modulo-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tarjetas contenedoras oscuras a juego con el panel */
+.consumos-card {
+  background: #0b1320; /* Azul noche oscuro */
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.consumos-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Previsualización del despacho o remito interno (Naranja translúcido) */
+.despacho-preview {
+  margin: 15px 0;
+  padding: 12px;
+  background-color: rgba(249, 115, 22, 0.06);
+  border: 1px dashed rgba(249, 115, 22, 0.25);
+  border-radius: 8px;
+  color: #ff9d43;
+  font-weight: 700;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+/* Animación de entrada suave para la pestaña */
+@keyframes fadeSlideInSub {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

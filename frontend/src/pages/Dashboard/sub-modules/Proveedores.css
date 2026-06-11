@@ -1,0 +1,64 @@
+/* Contenedor principal en grilla fluida */
+.proveedores-modulo-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 25px;
+  margin-top: 5px;
+  animation: fadeSlideInSub 0.4s ease-out forwards;
+}
+
+@media (max-width: 1024px) {
+  .proveedores-modulo-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tarjetas contenedoras oscuras a juego con el panel */
+.proveedores-card {
+  background: #0b1320; /* Azul noche oscuro */
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.proveedores-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Etiquetas de tipo de proveedor con alto contraste translúcido */
+.badge-prov-tipo {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.badge-prov-persona { 
+  background-color: rgba(245, 158, 11, 0.15); 
+  color: #fbbf24; 
+}
+
+.badge-prov-empresa { 
+  background-color: rgba(168, 85, 247, 0.15); 
+  color: #c084fc; 
+}
+
+/* Animación de entrada suave para la pestaña */
+@keyframes fadeSlideInSub {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,182 @@
+/* Contenedor principal con imagen de fondo oscura (grúas/obras) */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Podés usar un color liso oscuro o meter una foto de fondo luego */
+  background: radial-gradient(circle at center, #0b1528 0%, #050b14 100%);
+  font-family: system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* Contenedor animado que agrupa el logo y la tarjeta */
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  animation: aparecerHaciaArriba 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Contenedor del Logo de SIGMA */
+.login-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.login-logo {
+  max-width: 240px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Tarjeta translúcida (Efecto Vidrio / Glassmorphism) */
+.login-card {
+  background: rgba(15, 23, 42, 0.45); /* Azul muy oscuro con transparencia */
+  backdrop-filter: blur(16px); /* Desenfoque de fondo */
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Borde blanco sutil */
+  border-radius: 16px;
+  padding: 40px 35px;
+  width: 100%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+/* Textos de Bienvenida */
+.login-card h3 {
+  color: #ffffff;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.login-card .subtitle {
+  color: #64748b;
+  text-align: center;
+  font-size: 14px;
+  margin: 0 0 28px 0;
+}
+
+/* Estructura de Inputs con Íconos internos */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-wrapper .icon-left {
+  position: absolute;
+  left: 14px;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.input-icon-wrapper input {
+  width: 100%;
+  padding: 14px 16px 14px 42px; /* Espacio izquierdo para el ícono */
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.input-icon-wrapper input::placeholder {
+  color: #475569;
+}
+
+.input-icon-wrapper input:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: rgba(15, 23, 42, 0.8);
+}
+
+/* Botón de Ingresar Azul Vibrante con flecha */
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background-color: #1d4ed8;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #2563eb;
+}
+
+/* Separador horizontal sutil abajo */
+.login-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 25px 0 20px 0;
+}
+
+/* Enlace de ayuda inferior */
+.login-help-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  color: #38bdf8;
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.login-help-link:hover {
+  color: #7dd3fc;
+}
+
+.error-text {
+  color: #f87171;
+  text-align: center;
+  font-size: 13px;
+  margin-top: 10px;
+  background-color: rgba(239, 68, 68, 0.1);
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* 🔄 ANIMACIÓN HACIERA ARRIBA */
+@keyframes aparecerHaciaArriba {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

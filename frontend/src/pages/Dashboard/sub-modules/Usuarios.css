@@ -1,0 +1,224 @@
+/* Contenedores de Grilla para los módulos (Formulario izquierda, Tabla derecha) */
+.usuarios-modulo-container,
+.clientes-modulo-container,
+.proveedores-modulo-container,
+.materiales-modulo-container,
+.compras-modulo-container,
+.obras-modulo-container,
+.asistencias-modulo-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 25px;
+  margin-top: 5px;
+  animation: fadeSlideInSub 0.4s ease-out forwards;
+}
+
+@media (max-width: 1024px) {
+  .usuarios-modulo-container, .clientes-modulo-container, .proveedores-modulo-container,
+  .materiales-modulo-container, .compras-modulo-container, .obras-modulo-container, .asistencias-modulo-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tarjetas Contenedoras Oscuras */
+.usuarios-card,
+.clientes-card,
+.proveedores-card,
+.materiales-card,
+.compras-card,
+.obras-card,
+.asistencias-card {
+  background: #0b1320; /* Color exacto del Sidebar y tarjetas KPI */
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.usuarios-card h3, .clientes-card h3, .proveedores-card h3, 
+.materiales-card h3, .compras-card h3, .obras-card h3, .asistencias-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Estructura de Formularios e Inputs Oscuros */
+.input-field-group {
+  margin-bottom: 16px;
+}
+
+.input-field-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.input-field-group input,
+.input-field-group select {
+  width: 100%;
+  padding: 11px 14px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.input-field-group input:focus,
+.input-field-group select:focus {
+  outline: none;
+  border-color: #1d4ed8;
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.input-field-group input::placeholder {
+  color: #475569;
+}
+
+/* Botones de Acción Principales */
+.btn-registrar {
+  width: 100%;
+  padding: 12px;
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 5px;
+}
+
+.btn-registrar:hover {
+  background: #2563eb;
+}
+
+.btn-cancelar {
+  width: 100%;
+  padding: 11px;
+  background: #1e293b;
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+
+.btn-cancelar:hover {
+  background: #334155;
+  color: #ffffff;
+}
+
+/* 📊 TABLAS DE DATOS MODERNAS Y OSCURAS */
+.usuarios-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.usuarios-tabla th {
+  background-color: rgba(15, 23, 42, 0.5);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+  padding: 14px 16px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.usuarios-tabla td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
+}
+
+.usuarios-tabla tr:hover td {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+/* Botones de Operación dentro de las Filas (Editar / Borrar) */
+.acciones-header, .acciones-cell {
+  text-align: right;
+}
+
+.btn-editar-tabla {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  margin-right: 8px;
+  transition: all 0.2s;
+}
+
+.btn-editar-tabla:hover {
+  background: #d97706;
+  color: #ffffff;
+}
+
+.btn-eliminar-tabla {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.btn-eliminar-tabla:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Mensajes de Estado */
+.status-message {
+  font-size: 13px;
+  text-align: center;
+  margin: 12px 0;
+  font-weight: 500;
+  padding: 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Etiquetas de Roles y Estados */
+.badge-rol {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-admin { background-color: rgba(234, 179, 8, 0.15); color: #eab308; }
+.badge-otros { background-color: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+
+/* Animación sutil al alternar entre pestañas */
+@keyframes fadeSlideInSub {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

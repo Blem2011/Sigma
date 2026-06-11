@@ -1,0 +1,460 @@
+/* Modificá o asegurate de que la clase principal tenga la propiedad de animación */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #060b13;
+  font-family: system-ui, sans-serif;
+  color: #ffffff;
+
+  /* 🎬 EFECTO DE ENTRADA: Dura 0.6 segundos, inicio suave y se queda fijo al final */
+  animation: entrarDashboard 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 🔄 DEFINICIÓN DE LA ANIMACIÓN DE ENTRADA */
+@keyframes entrarDashboard {
+  from {
+    opacity: 0;
+    transform: scale(0.97); /* Empieza un poquito más chico, dando efecto de profundidad */
+    filter: blur(4px);      /* Un leve desenfoque inicial para mayor suavidad */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);    /* Llega a su tamaño real a pantalla completa */
+    filter: blur(0);
+  }
+}
+
+
+
+/* 📊 BARRA LATERAL IZQUIERDA (SIDEBAR) */
+.sidebar {
+  width: 260px;
+  background-color: #0b1320; /* Azul noche del sidebar */
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  position: fixed;
+  height: 100vh;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+/* Encabezado del Sidebar (Logo + Texto) */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.sidebar-brand-text h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+.sidebar-brand-text span {
+  font-size: 10px;
+  color: #ea580c; /* Color naranja de constructora */
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Botones de navegación de la barra lateral */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #94a3b8; /* Gris opaco para los inactivos */
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+}
+
+/* Botón activo azul brillante */
+.sidebar-item.active {
+  background: #1d4ed8;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
+}
+
+/* Pie de página del Sidebar */
+.sidebar-footer {
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-footer h4 {
+  margin: 0 0 4px 0;
+  font-size: 13px;
+  color: #f1f5f9;
+}
+
+.sidebar-footer p {
+  margin: 0;
+  font-size: 11px;
+  color: #64748b;
+  line-height: 140%;
+}
+
+/* 🖥️ ÁREA DE CONTENIDO PRINCIPAL (DERECHA) */
+.main-content {
+  flex-grow: 1;
+  margin-left: 260px; /* Deja el espacio de la barra fija */
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/* Barra superior del Panel (Header) */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: rgba(11, 19, 32, 0.4);
+  backdrop-filter: blur(8px);
+  padding: 15px 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.header-welcome {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-welcome h3 {
+  margin: 0 0 4px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.header-welcome span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Grupo del Perfil de Usuario arriba a la derecha */
+.header-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-widgets {
+  display: flex;
+  gap: 15px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.user-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar-placeholder {
+  width: 36px;
+  height: 36px;
+  background: #1e293b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.user-text-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-text-meta .username {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.user-text-meta .role {
+  font-size: 10px;
+  color: #eab308;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Botón de cerrar sesión estilo flecha sutil */
+.btn-header-logout {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.btn-header-logout:hover {
+  color: #ef4444;
+}
+
+/* ==========================================
+   ☀️ ESTILOS PARA EL MODO CLARO
+   ========================================== */
+
+/* Botón del switch de tema */
+/* ==========================================
+   🎛️ ESTILOS DEL SWITCH DESLIZANTE
+   ========================================== */
+
+/* Contenedor que agrupa el emoji y el switch */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 10px;
+}
+
+.switch-icon {
+  font-size: 14px;
+  user-select: none;
+}
+
+/* La cápsula del switch (Fondo por defecto: Gris Oscuro) */
+.theme-toggle-switch {
+  width: 48px;
+  height: 24px;
+  background-color: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* El círculo interno que se mueve (Posición inicial: Izquierda) */
+.switch-circle {
+  width: 18px;
+  height: 18px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+  /* Animación del movimiento fluida */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+}
+
+/* ☀️ Cambios cuando el Modo Claro está activo */
+
+/* La cápsula se vuelve azul brillante */
+.theme-toggle-switch.claro-activo {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+/* El círculo se desliza hacia la derecha usando transform */
+.theme-toggle-switch.claro-activo .switch-circle {
+  transform: translateX(22px);
+  background-color: #ffffff;
+}
+
+/* Ajuste de hover sutil para la cápsula */
+.theme-toggle-switch:hover {
+  filter: brightness(1.1);
+}
+
+
+/* ==========================================
+   ☀️ ESTILOS PARA EL MODO CLARO DEFINITIVOS
+   ========================================== */
+
+/* Cambios estructurales cuando la clase .claro está activa */
+.dashboard-layout.claro {
+  background-color: #f1f5f9; 
+  color: #0f172a; 
+}
+
+.dashboard-layout.claro .sidebar {
+  background-color: #ffffff; 
+  border-right: 1px solid #e2e8f0;
+}
+
+.dashboard-layout.claro .sidebar-brand-text h2 {
+  color: #0f172a;
+}
+
+.dashboard-layout.claro .sidebar-item {
+  color: #475569; 
+}
+
+.dashboard-layout.claro .sidebar-item:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.dashboard-layout.claro .sidebar-item.active {
+  background: #1d4ed8; 
+  color: #ffffff;
+}
+
+.dashboard-layout.claro .sidebar-footer h4 {
+  color: #334155;
+}
+
+.dashboard-layout.claro .main-header {
+  background: #ffffff; 
+  border: 1px solid #e2e8f0;
+}
+
+.dashboard-layout.claro .header-welcome h3 {
+  color: #0f172a;
+}
+
+.dashboard-layout.claro .user-text-meta .username {
+  color: #0f172a;
+}
+
+.dashboard-layout.claro .kpi-card {
+  background: #ffffff; 
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.dashboard-layout.claro .kpi-meta h3 {
+  color: #0f172a;
+}
+
+/* 🎯 CORRECCIÓN: Agrupamos todas las tarjetas de todos los submódulos */
+.dashboard-layout.claro .welcome-banner-info,
+.dashboard-layout.claro .usuarios-card,
+.dashboard-layout.claro .clientes-card,
+.dashboard-layout.claro .proveedores-card,
+.dashboard-layout.claro .materiales-card,
+.dashboard-layout.claro .compras-card,
+.dashboard-layout.claro .obras-card,
+.dashboard-layout.claro .consumos-card,
+.dashboard-layout.claro .empleados-card,
+.dashboard-layout.claro .asistencias-card {
+  background: #ffffff !important; 
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05) !important;
+}
+
+/* Forzar títulos internos de las tarjetas a negro */
+.dashboard-layout.claro .usuarios-card h3,
+.dashboard-layout.claro .clientes-card h3,
+.dashboard-layout.claro .proveedores-card h3,
+.dashboard-layout.claro .materiales-card h3,
+.dashboard-layout.claro .compras-card h3,
+.dashboard-layout.claro .obras-card h3,
+.dashboard-layout.claro .consumos-card h3,
+.dashboard-layout.claro .empleados-card h3,
+.dashboard-layout.claro .asistencias-card h3,
+.dashboard-layout.claro .welcome-banner-info h3 {
+  color: #0f172a !important;
+}
+
+/* 🎯 CORRECCIÓN: Buscamos las tablas dentro de cualquier contenedor de módulo */
+.dashboard-layout.claro .usuarios-modulo-container .usuarios-tabla th,
+.dashboard-layout.claro .clientes-modulo-container .usuarios-tabla th,
+.dashboard-layout.claro .proveedores-modulo-container .usuarios-tabla th,
+.dashboard-layout.claro .materiales-modulo-container .usuarios-tabla th,
+.dashboard-layout.claro .compras-modulo-container .usuarios-tabla th,
+.dashboard-layout.claro .obras-modulo-container .usuarios-tabla th,
+.dashboard-layout.claro .consumos-modulo-container .usuarios-tabla th,
+.dashboard-layout.claro .empleados-modulo-container .usuarios-tabla th,
+.dashboard-layout.claro .asistencias-modulo-container .usuarios-tabla th {
+  background-color: #f8fafc !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+.dashboard-layout.claro .usuarios-modulo-container .usuarios-tabla td,
+.dashboard-layout.claro .clientes-modulo-container .usuarios-tabla td,
+.dashboard-layout.claro .proveedores-modulo-container .usuarios-tabla td,
+.dashboard-layout.claro .materiales-modulo-container .usuarios-tabla td,
+.dashboard-layout.claro .compras-modulo-container .usuarios-tabla td,
+.dashboard-layout.claro .obras-modulo-container .usuarios-tabla td,
+.dashboard-layout.claro .consumos-modulo-container .usuarios-tabla td,
+.dashboard-layout.claro .empleados-modulo-container .usuarios-tabla td,
+.dashboard-layout.claro .asistencias-modulo-container .usuarios-tabla td {
+  border-bottom: 1px solid #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+/* 🎯 CORRECCIÓN: Buscamos los inputs y selects dentro de cualquier contenedor de módulo */
+.dashboard-layout.claro .usuarios-modulo-container .input-field-group input,
+.dashboard-layout.claro .usuarios-modulo-container .input-field-group select,
+.dashboard-layout.claro .clientes-modulo-container .input-field-group input,
+.dashboard-layout.claro .clientes-modulo-container .input-field-group select,
+.dashboard-layout.claro .proveedores-modulo-container .input-field-group input,
+.dashboard-layout.claro .proveedores-modulo-container .input-field-group select,
+.dashboard-layout.claro .materiales-modulo-container .input-field-group input,
+.dashboard-layout.claro .materiales-modulo-container .input-field-group select,
+.dashboard-layout.claro .compras-modulo-container .input-field-group input,
+.dashboard-layout.claro .compras-modulo-container .input-field-group select,
+.dashboard-layout.claro .obras-modulo-container .input-field-group input,
+.dashboard-layout.claro .obras-modulo-container .input-field-group select,
+.dashboard-layout.claro .consumos-modulo-container .input-field-group input,
+.dashboard-layout.claro .consumos-modulo-container .input-field-group select,
+.dashboard-layout.claro .empleados-modulo-container .input-field-group input,
+.dashboard-layout.claro .empleados-modulo-container .input-field-group select,
+.dashboard-layout.claro .asistencias-modulo-container .input-field-group input,
+.dashboard-layout.claro .asistencias-modulo-container .input-field-group select {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+/* Forzar el estilo del focus en modo claro para todos */
+.dashboard-layout.claro .input-field-group input:focus,
+.dashboard-layout.claro .input-field-group select:focus {
+  border-color: #1d4ed8 !important;
+}
+
+/* Retoque extra para que las etiquetas grises del personal mantengan contraste claro */
+.dashboard-layout.claro .badge-especialidad {
+  background-color: #f1f5f9 !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+.dashboard-layout.claro .obra-libre-text {
+  color: #94a3b8 !important;
+}
