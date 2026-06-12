@@ -49,7 +49,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       const alertasActuales: string[] = [];
 
       // A. Filtrar insumos con Stock menor o igual al mínimo
-      const resMat = await axios.get('https://railway.app');
+      const resMat = await axios.get('https://sigma-production-e9dc.up.railway.app/api/materiales');
       resMat.data.forEach((m: any) => {
         if (Number(m.cantidad) <= Number(m.stock_minimo)) {
           alertasActuales.push(`⚠️ Stock crítico: ${m.nombre} quedará sin insumos en depósito.`);
@@ -57,7 +57,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       });
 
       // B. Filtrar proyectos de Obras que estén detenidos
-      const resObras = await axios.get('https://railway.app');
+      const resObras = await axios.get('https://sigma-production-e9dc.up.railway.app/api/obras');
       resObras.data.forEach((o: any) => {
         if (o.estado === 'Pausada') {
           alertasActuales.push(`🏗️ Obra detenida: El proyecto "${o.nombre}" se encuentra pausado.`);
@@ -65,7 +65,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       });
 
       // C. Filtrar incidencias de presentismo del día de hoy
-      const resAsis = await axios.get('https://railway.app');
+      const resAsis = await axios.get('https://sigma-production-e9dc.up.railway.app/api/asistencias');
       const hoyISO = new Date().toISOString().substring(0, 10);
       resAsis.data.forEach((a: any) => {
         const fechaAsis = a.fecha.substring(0, 10);
