@@ -135,6 +135,10 @@
   margin-left: 260px; /* Deja el espacio de la barra fija */
   padding: 30px;
   box-sizing: border-box;
+  
+  /* 🎯 Agregamos esto para respaldar el orden jerárquico */
+  position: relative !important;
+  z-index: 10 !important;
 }
 
 /* Barra superior del Panel (Header) */
@@ -149,9 +153,19 @@
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.03);
   
-  /* 🎯 CLAVE: Permitimos que las cajas flotantes salgan de la cabecera y ganen prioridad */
+  /* 🎯 SOLUCIÓN DEFINITIVA: Posicionamiento para habilitar el orden de capas */
+  position: relative !important;
   overflow: visible !important; 
-  z-index: 999 /* Le da prioridad sobre los formularios y tablas de abajo */
+  z-index: 99999 !important; /* Prioridad superior absoluta sobre cualquier animación de abajo */
+}
+
+/* Forzar el mismo comportamiento en modo claro */
+.dashboard-layout.claro .main-header {
+  background: #ffffff !important; 
+  border: 1px solid #e2e8f0 !important;
+  position: relative !important;
+  overflow: visible !important;
+  z-index: 99999 !important;
 }
 
 .header-welcome {
