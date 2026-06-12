@@ -458,3 +458,111 @@
 .dashboard-layout.claro .obra-libre-text {
   color: #94a3b8 !important;
 }
+
+/* Contenedor relativo para posicionar el panel flotante */
+.notification-bell-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-bell-toggle {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #64748b;
+  position: relative;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.btn-bell-toggle:hover {
+  color: #ffffff;
+}
+
+/* 🔴 Globo rojo con el número de alertas activas */
+.bell-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: #ef4444;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+/* 🪟 PANEL FLOTANTE DE NOTIFICACIONES */
+.notifications-dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  width: 290px;
+  background: rgba(11, 19, 32, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  padding: 10px 0;
+  animation: dropdownFade 0.2s ease-out forwards;
+}
+
+.notifications-dropdown h4 {
+  margin: 0;
+  padding: 8px 16px 12px 16px;
+  font-size: 13px;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.notifications-list {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 140%;
+}
+
+.notification-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.notification-empty {
+  padding: 20px;
+  text-align: center;
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* ☀️ Modificaciones automáticas para el MODO CLARO */
+.claro .btn-bell-toggle { color: #475569; }
+.claro .btn-bell-toggle:hover { color: #0f172a; }
+.claro .notifications-dropdown {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.claro .notifications-dropdown h4 { color: #0f172a; border-bottom: 1px solid #e2e8f0; }
+.claro .notification-item { color: #334155; border-bottom: 1px solid #f1f5f9; }
+.claro .notification-item:hover { background: #f8fafc; }
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

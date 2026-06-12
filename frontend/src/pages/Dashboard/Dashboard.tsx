@@ -23,6 +23,9 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   const [moduloActivo, setModuloActivo] = useState<ModulosDisponibles>('dashboard');
   const [modoClaro, setModoClaro] = useState<boolean>(false);
 
+  // 🔔 Estados para el control y guardado de alertas operativas
+  const [mostrarNotificaciones, setMostrarNotificaciones] = useState<boolean>(false);
+  const [notificaciones, setNotificaciones] = useState<string[]>([]);
   // 🕒 NUEVO: Estado para guardar la hora real de tu PC
   const [horaReal, setHoraReal] = useState<string>('');
 
@@ -39,6 +42,49 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
     return () => clearInterval(intervalo); // Limpia el proceso al salir
   }, []);
+
+    // 🔔 NUEVO: Efecto exclusivo para cargar las alertas operativas del sistema
+  const cargarAlertasDelSistema = async () => {
+    try {
+      const alertasActuales: string[] = [];
+
+      // A. Filtrar insumos con Stock menor o igual al mínimo
+      const resMat = await axios.get('https://railway.app');
+      resMat.data.forEach((m: any) => {
+        if (Number(m.cantidad) <= Number(m.stock_minimo)) {
+          alertasActuales.push(`⚠️ Stock crítico: ${m.nombre} quedará sin insumos en depósito.`);
+        }
+      });
+
+      // B. Filtrar proyectos de Obras que estén detenidos
+      const resObras = await axios.get('https://railway.app');
+      resObras.data.forEach((o: any) => {
+        if (o.estado === 'Pausada') {
+          alertasActuales.push(`🏗️ Obra detenida: El proyecto "${o.nombre}" se encuentra pausado.`);
+        }
+      });
+
+      // C. Filtrar incidencias de presentismo del día de hoy
+      const resAsis = await axios.get('https://railway.app');
+      const hoyISO = new Date().toISOString().substring(0, 10);
+      resAsis.data.forEach((a: any) => {
+        const fechaAsis = a.fecha.substring(0, 10);
+        if (fechaAsis === hoyISO && (a.estado === 'Ausente' || a.estado === 'Tardanza')) {
+          alertasActuales.push(`⏱️ Personal: ${a.empleado_nombre} registró "${a.estado}" en la jornada de hoy.`);
+        }
+      });
+
+      setNotificaciones(alertasActuales);
+    } catch (err) {
+      console.error('Error al sincronizar alertas de la campanita:', err);
+    }
+  };
+
+  // Disparar el recuento automático cada vez que el usuario navega o cambia de pestaña
+  useEffect(() => {
+    cargarAlertasDelSistema();
+  }, [moduloActivo]);
+  
 
   const tienePermiso = (modulo: ModulosDisponibles): boolean => {
     if (modulo === 'dashboard') return true;
@@ -153,6 +199,8 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
           <div className="header-user-profile">
             <div className="header-widgets">
+              
+              {/* INTERFAZ DEL SWITCH DE TEMA */}
               <div className="theme-switch-wrapper">
                 <span className="switch-icon">{modoClaro ? '🌙' : '☀️'}</span>
                 <button 
@@ -164,10 +212,38 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
                 </button>
               </div>
               
-              {/* 🕒 CORRECCIÓN: Ahora imprime la variable del estado dinámico */}
+              {/* 🕒 RELOJ LOCAL EN TIEMPO REAL */}
               <span>🕒 {horaReal || 'Cargando hora...'}</span>
-              <span>🔔 (3)</span>
+
+              {/* 🔔 COMPONENTE DE LA CAMPANITA INTERACTIVA DINÁMICA */}
+              <div className="notification-bell-container">
+                <button 
+                  onClick={() => setMostrarNotificaciones(!mostrarNotificaciones)} 
+                  className="btn-bell-toggle" 
+                  title="Ver notificaciones"
+                >
+                  🔔 {notificaciones.length > 0 && <span className="bell-badge">{notificaciones.length}</span>}
+                </button>
+
+                {/* Menú desplegable flotante condicional */}
+                {mostrarNotificaciones && (
+                  <div className="notifications-dropdown">
+                    <h4>Notificaciones Operativas</h4>
+                    <div className="notifications-list">
+                      {notificaciones.length === 0 ? (
+                        <div className="notification-empty">✓ No hay alertas críticas en el sistema.</div>
+                      ) : (
+                        notificaciones.map((notif, index) => (
+                          <div key={index} className="notification-item">{notif}</div>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
             </div>
+
             <div className="user-badge-container">
               <div className="user-avatar-placeholder">👨‍💼</div>
               <div className="user-text-meta">
@@ -178,6 +254,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             </div>
           </div>
         </header>
+
 
         {/* CONTENEDOR MODULAR */}
         <main>
