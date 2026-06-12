@@ -148,6 +148,10 @@
   padding: 15px 25px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.03);
+  
+  /* 🎯 CLAVE: Permitimos que las cajas flotantes salgan de la cabecera y ganen prioridad */
+  overflow: visible !important; 
+  z-index: 999 /* Le da prioridad sobre los formularios y tablas de abajo */
 }
 
 .header-welcome {
