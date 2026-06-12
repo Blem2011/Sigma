@@ -67,10 +67,13 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
       // C. Filtrar incidencias de presentismo del día de hoy
       const resAsis = await axios.get('https://sigma-production-e9dc.up.railway.app/api/asistencias');
       const hoyISO = new Date().toISOString().substring(0, 10);
+      
       resAsis.data.forEach((a: any) => {
-        const fechaAsis = a.fecha.substring(0, 10);
+        const fechaAsis = a.fecha ? a.fecha.substring(0, 10) : '';
         if (fechaAsis === hoyISO && (a.estado === 'Ausente' || a.estado === 'Tardanza')) {
-          alertasActuales.push(`⏱️ Personal: ${a.empleado_nombre} registró "${a.estado}" en la jornada de hoy.`);
+          // Usamos una alternativa segura en caso de que no venga el nombre unido desde el backend
+          const nombreTrabajador = a.empleado_nombre || `Empleado ID: ${a.id_empleado}`;
+          alertasActuales.push(`⏱️ Personal: ${nombreTrabajador} registró "${a.estado}" en la jornada de hoy.`);
         }
       });
 
