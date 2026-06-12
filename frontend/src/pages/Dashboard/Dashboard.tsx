@@ -44,41 +44,57 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
     return () => clearInterval(intervalo); // Limpia el proceso al salir
   }, []);
 
-    // 🔔 NUEVO: Efecto exclusivo para cargar las alertas operativas del sistema
+  // 🔔 CALCULAR ALERTAS EN TIEMPO REAL FILTRADAS POR ROL
   const cargarAlertasDelSistema = async () => {
     try {
       const alertasActuales: string[] = [];
 
-      // A. Filtrar insumos con Stock menor o igual al mínimo
-      const resMat = await axios.get('https://sigma-production-e9dc.up.railway.app/api/materiales');
+      // A. Consultar Materiales con quiebre de Stock
+      const resMat = await axios.get('https://railway.app');
       resMat.data.forEach((m: any) => {
-        if (Number(m.cantidad) <= Number(m.stock_minimo)) {
+        const cantActual = parseFloat(m.cantidad) || 0;
+        const cantMinima = parseFloat(m.stock_minimo) || 0;
+        if (cantActual <= cantMinima) {
           alertasActuales.push(`⚠️ Stock crítico: ${m.nombre} quedará sin insumos en depósito.`);
         }
       });
 
-      // B. Filtrar proyectos de Obras que estén detenidos
-      const resObras = await axios.get('https://sigma-production-e9dc.up.railway.app/api/obras');
+      // B. Consultar Obras Pausadas
+      const resObras = await axios.get('https://railway.app');
       resObras.data.forEach((o: any) => {
         if (o.estado === 'Pausada') {
           alertasActuales.push(`🏗️ Obra detenida: El proyecto "${o.nombre}" se encuentra pausado.`);
         }
       });
 
-      // C. Filtrar incidencias de presentismo del día de hoy
-      const resAsis = await axios.get('https://sigma-production-e9dc.up.railway.app/api/asistencias');
+      // C. Consultar Incidencias de Asistencia de hoy
+      const resAsis = await axios.get('https://railway.app');
       const hoyISO = new Date().toISOString().substring(0, 10);
-      
       resAsis.data.forEach((a: any) => {
         const fechaAsis = a.fecha ? a.fecha.substring(0, 10) : '';
         if (fechaAsis === hoyISO && (a.estado === 'Ausente' || a.estado === 'Tardanza')) {
-          // Usamos una alternativa segura en caso de que no venga el nombre unido desde el backend
           const nombreTrabajador = a.empleado_nombre || `Empleado ID: ${a.id_empleado}`;
           alertasActuales.push(`⏱️ Personal: ${nombreTrabajador} registró "${a.estado}" en la jornada de hoy.`);
         }
       });
 
-      setNotificaciones(alertasActuales);
+      // 🎯 FILTRO ESTRICTO SEGÚN EL ROL DEL USUARIO CONECTADO
+      let alertasFiltradas: string[] = [];
+
+      if (user.rol === 'admin') {
+        // El administrador ve absolutamente todo
+        alertasFiltradas = alertasActuales;
+      } 
+      else if (user.rol === 'compras' || user.rol === 'almacen') {
+        // Compras y Almacén solo ven las alertas que empiezan con el ícono del stock crítico
+        alertasFiltradas = alertasActuales.filter(alerta => alerta.startsWith('⚠️'));
+      } 
+      else {
+        // Ventas, Obras y RRHH no ven ninguna notificación
+        alertasFiltradas = [];
+      }
+
+      setNotificaciones(alertasFiltradas);
     } catch (err) {
       console.error('Error al sincronizar alertas de la campanita:', err);
     }
