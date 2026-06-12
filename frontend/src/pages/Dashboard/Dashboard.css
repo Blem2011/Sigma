@@ -502,18 +502,21 @@
 /* 🪟 PANEL FLOTANTE DE NOTIFICACIONES */
 .notifications-dropdown {
   position: absolute;
-  top: 35px;
+  top: 45px; /* Un poquito más abajo de la campana para que no la tape */
   right: 0;
-  width: 290px;
-  background: rgba(11, 19, 32, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  padding: 10px 0;
-  animation: dropdownFade 0.2s ease-out forwards;
+  width: 310px; /* Un pelín más ancho para que los textos queden cómodos */
+  background: rgba(11, 19, 32, 0.96); /* Azul noche ultra opaco translúcido */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil brillante */
+  border-radius: 12px;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  
+  /* 🔝 PRIORIDAD ABSOLUTA: Forzamos a que flote siempre por encima de cualquier módulo */
+  z-index: 9999 !important; 
+  padding: 12px 0;
+  box-sizing: border-box;
+  animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .notifications-dropdown h4 {
@@ -554,9 +557,10 @@
 .claro .btn-bell-toggle { color: #475569; }
 .claro .btn-bell-toggle:hover { color: #0f172a; }
 .claro .notifications-dropdown {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15) !important;
+  z-index: 9999 !important;
 }
 .claro .notifications-dropdown h4 { color: #0f172a; border-bottom: 1px solid #e2e8f0; }
 .claro .notification-item { color: #334155; border-bottom: 1px solid #f1f5f9; }
