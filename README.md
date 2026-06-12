@@ -4,7 +4,8 @@
 
 ## 📺 Demostración del Sistema en Vivo
 
-![Dashboard-Sigma]([https://github.com](https://github.com/Blem2011/Sigma/issues/1#issue-4646696840))
+<img width="100%" alt="Dashboard SIGMA" src="https://github.com/user-attachments/assets/3a3fd7b8-95cd-4a47-abfd-c78d931a3de6" />
+
 
 ## 💻 Stack Tecnológico
 * **Frontend**: React, TypeScript, Vite, CSS3 Premium.
